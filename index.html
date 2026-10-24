@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#f3e6cd"><title>浮生录 · บันทึกชีวิตล่องลอย</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap');
+:root{--paper:#f4e8d1;--ink:#35281f;--red:#8e3029;--gold:#b88a4b;--muted:#806d5b;--line:#d8c3a0}
+*{box-sizing:border-box}body{margin:0;background:#e5d4b7;color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;min-height:100dvh}
+button,select{font:inherit}button{cursor:pointer;touch-action:manipulation}
+.app{width:100%;max-width:540px;min-height:100dvh;margin:auto;background:var(--paper);position:relative;box-shadow:0 0 50px #34271c2b;overflow:hidden}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:#f7eddc;position:relative;z-index:2}
+.brand{font-family:'Charm',serif;font-size:23px;color:var(--red);letter-spacing:1px}.brand small{display:block;font:10px 'IBM Plex Sans Thai';letter-spacing:2px;color:var(--muted)}
+.iconbtn{border:1px solid var(--line);background:#fff8e9;color:var(--red);border-radius:50%;width:38px;height:38px;font-size:17px}
+.scene{height:260px;position:relative;overflow:hidden;background:linear-gradient(#d8c7a8,#f1dfbb 62%,#9baf9c)}
+.scene svg{position:absolute;inset:0;width:100%;height:100%}.scene:after{content:"";position:absolute;inset:0;box-shadow:inset 0 -22px 24px #47352326;pointer-events:none}
+.scene-label{position:absolute;left:16px;top:14px;z-index:1;background:#f7ebd4df;border:1px solid #b99a6b;padding:5px 12px;color:var(--red);font-size:12px;letter-spacing:2px}
+.person{position:absolute;z-index:1;bottom:-4px;left:50%;transform:translateX(-50%);height:176px;width:124px}
+.person .hair{position:absolute;left:31px;top:3px;width:63px;height:75px;border-radius:48% 48% 38% 38%;background:#211b1a;box-shadow:0 -6px 0 4px #211b1a}
+.person .face{position:absolute;left:40px;top:23px;width:47px;height:58px;border-radius:45% 45% 48% 48%;background:#f0cda9;border:1px solid #d7a77f}
+.person .body{position:absolute;left:12px;top:75px;width:102px;height:105px;background:#9e3430;clip-path:polygon(28% 0,72% 0,100% 100%,0 100%);border:0}
+.person .collar{position:absolute;left:52px;top:75px;width:26px;height:47px;background:#ead6b5;clip-path:polygon(0 0,100% 0,50% 100%)}
+.person .ornament{position:absolute;top:5px;left:83px;width:8px;height:35px;background:#c7a45f;border-radius:8px;transform:rotate(16deg)}
+.person.male .body{background:#263b45}.person.old .hair{background:#a6a19a;box-shadow:0 -6px 0 4px #a6a19a}.person.child{transform:translateX(-50%) scale(.68);transform-origin:bottom}
+.intro{padding:18px 18px 10px;text-align:center}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--gold)}h1{font-family:'Charm',serif;font-size:28px;font-weight:400;color:var(--red);margin:3px 0 4px} .subtitle{font-size:12px;color:var(--muted)}
+.panel{margin:10px 14px;padding:15px;border:1px solid var(--line);background:#fff8ebad;position:relative}
+.panel:before,.panel:after{content:"❧";position:absolute;color:#b18a52;font-size:19px;top:2px}.panel:before{left:7px}.panel:after{right:7px;transform:scaleX(-1)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.stat{background:#f2e2c8;border:1px solid #e1cba7;padding:8px 4px;text-align:center;border-radius:7px}.stat b{display:block;font-size:16px;color:var(--red)}.stat span{font-size:10px;color:var(--muted)}
+.progress{height:4px;background:#e4d2b4;margin-top:12px;border-radius:9px;overflow:hidden}.progress div{height:100%;background:linear-gradient(90deg,#8e3029,#c99a59);width:0;transition:width .5s}
+.event-title{font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:4px}.event-head{font-family:'Charm',serif;font-size:22px;color:var(--red);margin:0 0 7px}.story{font-size:14px;line-height:1.9;margin:0;white-space:pre-line}.choices{display:grid;gap:8px;margin-top:14px}.choice{width:100%;text-align:left;padding:11px 13px;background:#f8edd9;border:1px solid #cfb58c;border-radius:8px;color:var(--ink);font-size:13px;line-height:1.5}.choice:active{background:#ecd5b2}.choice strong{display:block;color:var(--red);font-weight:600}.choice small{color:var(--muted)}
+.controls{display:flex;gap:7px;padding:4px 14px 14px}.btn{flex:1;border:1px solid #8e3029;background:var(--red);color:#fff4df;padding:10px 7px;border-radius:8px;font-size:12px}.btn.secondary{background:#f7ead3;color:var(--red);border-color:#c7aa7c}.btn:disabled{opacity:.4;cursor:default}
+.toolbar{display:flex;justify-content:space-between;align-items:center;padding:0 16px 14px;color:var(--muted);font-size:11px}.toolbar select{background:#fff5e4;border:1px solid var(--line);border-radius:6px;padding:5px;color:var(--ink)}
+.timeline{padding:13px 16px 22px;border-top:1px solid var(--line);background:#efe0c5}.timeline h3{font-family:'Charm';font-size:18px;color:var(--red);font-weight:400;margin:0 0 10px}.stages{display:flex;gap:7px;overflow:auto;padding-bottom:4px}.stage{min-width:64px;text-align:center;font-size:10px;color:#8b7965}.stage .seal{height:38px;width:38px;margin:0 auto 5px;border:1px solid #c8ad82;border-radius:50%;display:grid;place-items:center;background:#f8edd9;font-size:18px}.stage.active .seal{background:var(--red);color:#fff0d5;border-color:var(--red)}.stage.active{color:var(--red);font-weight:600}
+.footer{text-align:center;font-size:10px;color:#a18b70;padding:10px 12px 22px}.hidden{display:none!important}.modal{position:fixed;inset:0;background:#241a16a8;display:grid;place-items:center;z-index:9;padding:20px}.modalbox{max-width:420px;width:100%;background:var(--paper);padding:22px;border:1px solid var(--gold);border-radius:12px;text-align:center}.modalbox h2{font-family:'Charm';font-weight:400;color:var(--red)}.pill{display:inline-block;background:#ead5b5;border-radius:99px;padding:4px 9px;font-size:11px;color:var(--red);margin:3px}
+@media(min-width:540px){.scene{height:300px}.app{min-height:100vh}.story{font-size:15px}}
+</style>
+</head>
+<body><main class="app">
+<header class="topbar"><div class="brand">浮生录 <small>บันทึกชีวิตล่องลอย</small></div><button class="iconbtn" id="musicBtn" aria-label="เปิดปิดเพลง">♫</button></header>
+<audio id="bgm" src="fushenglu_bgm.mp3" loop preload="none"></audio>
+<section class="scene" id="scene">
+<div class="scene-label" id="sceneLabel">长安 · ฉางอาน</div>
+<svg viewBox="0 0 540 280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d4c1a0"/><stop offset="1" stop-color="#f7e7c7"/></linearGradient></defs>
+<rect width="540" height="280" fill="url(#sky)"/>
+<circle cx="405" cy="58" r="27" fill="#f5e7bd" opacity=".9"/>
+<path d="M0 155 Q70 90 140 155 T285 142 T540 130 V280 H0Z" fill="#9eae9b" opacity=".7"/>
+<path d="M0 188 Q100 130 190 186 T370 175 T540 170 V280 H0Z" fill="#788f7b" opacity=".7"/>
+<path d="M0 232 Q150 196 275 230 T540 215 V280 H0Z" fill="#b9b89a"/>
+<g stroke="#51463b" stroke-width="2" fill="#665044">
+<path d="M54 166 L54 117 L88 117 L88 166Z"/><path d="M43 119 L71 95 L99 119Z" fill="#7e3d32"/><path d="M48 113 L71 87 L94 113" fill="none" stroke="#7e3d32" stroke-width="6"/>
+<path d="M385 176 L385 106 L434 106 L434 176Z"/><path d="M374 108 L409 76 L445 108Z" fill="#803b30"/><path d="M380 101 L409 69 L440 101" fill="none" stroke="#803b30" stroke-width="7"/>
+<path d="M414 104 L414 78 L440 78 L440 104Z"/><path d="M407 80 L427 60 L447 80Z" fill="#803b30"/>
+<path d="M0 215 Q90 202 168 219 L168 280 L0 280Z" fill="#d0b895" stroke="none"/>
+</g>
+<g stroke="#58483b" stroke-width="2" fill="#8c3b30">
+<path d="M210 197 V147 H254 V197Z" fill="#9e805d"/><path d="M201 150 L232 126 L263 150Z"/><path d="M205 145 L232 119 L259 145" fill="none" stroke-width="6"/>
+<path d="M283 206 V161 H320 V206Z" fill="#a78a65"/><path d="M275 163 L301 143 L328 163Z"/><path d="M279 158 L301 137 L324 158" fill="none" stroke-width="5"/>
+</g>
+<path d="M0 247 Q115 226 224 246 T540 241 V280 H0Z" fill="#526f65"/>
+<path d="M0 259 Q150 243 270 260 T540 253" fill="none" stroke="#d8c5a1" stroke-width="2" opacity=".8"/>
+<g fill="#8b3029"><circle cx="26" cy="43" r="5"/><circle cx="43" cy="53" r="4"/><circle cx="16" cy="65" r="3"/><circle cx="95" cy="28" r="4"/><circle cx="115" cy="42" r="5"/><circle cx="78" cy="64" r="3"/></g>
+<g stroke="#4b4235" stroke-width="3" fill="none"><path d="M15 0 Q30 45 55 77 Q70 91 95 101"/><path d="M40 44 L80 24 M58 67 L112 62 M70 82 L47 104"/></g>
+<g fill="#b84a3d" opacity=".85"><ellipse cx="61" cy="26" rx="7" ry="4" transform="rotate(30 61 26)"/><ellipse cx="85" cy="42" rx="7" ry="4" transform="rotate(-20 85 42)"/><ellipse cx="102" cy="61" rx="7" ry="4" transform="rotate(40 102 61)"/><ellipse cx="36" cy="74" rx="7" ry="4" transform="rotate(-20 36 74)"/></g>
+</svg>
+<div class="person hidden" id="person"><div class="hair"></div><div class="face"></div><div class="ornament"></div><div class="body"></div><div class="collar"></div></div>
+</section>
+<section class="intro"><div class="eyebrow" id="eyebrow">一生一世 · หนึ่งชีวิต หนึ่งชะตา</div><h1 id="screenTitle">ชะตาชีวิตในแผ่นดินมังกร</h1><div class="subtitle" id="screenSub">เกิด แก่ เจ็บ ตาย · เรื่องราวของคนธรรมดาในจีนโบราณ</div></section>
+<section class="panel" id="mainPanel">
+<div class="event-title" id="eventKicker">บทนำ · 序</div><h2 class="event-head" id="eventHead">ทุกชีวิตเริ่มต้นจากความว่างเปล่า</h2><p class="story" id="story">ในคืนที่โคมแดงส่องแสงเหนือเมืองหลวง เสียงระฆังจากวัดเก่าแว่วผ่านสายหมอก ชะตาชีวิตหนึ่งกำลังจะเริ่มต้นขึ้น…</p>
+<div class="stats hidden" id="stats">
+<div class="stat"><b id="health">82</b><span>สุขภาพ ♥</span></div><div class="stat"><b id="joy">65</b><span>ความสุข ✿</span></div><div class="stat"><b id="wisdom">30</b><span>ปัญญา 文</span></div><div class="stat"><b id="fortune">25</b><span>วาสนา 福</span></div>
+</div><div class="progress hidden" id="progress"><div id="progressFill"></div></div><div class="choices hidden" id="choices"></div>
+</section>
+<div class="controls" id="startControls"><button class="btn" id="startBtn">✧ เริ่มต้นชีวิต ✧</button><button class="btn secondary" id="howBtn">วิธีเล่น</button></div>
+<div class="controls hidden" id="gameControls"><button class="btn secondary" id="pauseBtn">Ⅱ หยุด</button><button class="btn secondary" id="autoBtn">自動 อัตโนมัติ: ปิด</button><button class="btn" id="nextBtn">ปีถัดไป ›</button></div>
+<div class="toolbar hidden" id="toolbar"><span id="ageText">อายุ 0 ปี</span><label>ความเร็ว <select id="speed"><option value="1">ช้า ×1</option><option value="2">ปกติ ×2</option><option value="4">เร็ว ×4</option></select></label><span id="status">กำลังดำเนินชีวิต</span></div>
+<section class="timeline"><h3>年轮 · วงปีแห่งชีวิต</h3><div class="stages" id="stages">
+<div class="stage active"><div class="seal">☯</div>กำเนิด</div><div class="stage"><div class="seal">孩</div>วัยเด็ก</div><div class="stage"><div class="seal">花</div>วัยเยาว์</div><div class="stage"><div class="seal">文</div>วัยผู้ใหญ่</div><div class="stage"><div class="seal">家</div>ครอบครัว</div><div class="stage"><div class="seal">竹</div>วัยชรา</div><div class="stage"><div class="seal">月</div>ปลายทาง</div></div></section>
+<div class="footer">浮生若梦 · ชีวิตดุจความฝัน | เรื่องราวทั้งหมดเป็นเรื่องสมมติ</div>
+</main>
+<div class="modal hidden" id="modal"><div class="modalbox"><h2 id="modalTitle">วิธีเล่น</h2><p id="modalText" class="story">เกมจะเดินทีละปี เหตุการณ์บางช่วงจะให้คุณเลือก ส่วนปีอื่นสามารถปล่อยให้ระบบดำเนินต่อเองได้</p><button class="btn" id="modalClose">เข้าใจแล้ว</button></div></div>
+<script>
+const namesF=['หลินอวี้','เสิ่นเยว่','ซูเหยา','ไป๋หลิง','เยี่ยนหนิง','เจียงหว่าน','ลั่วชิง','ถังซิน','กู้หรง','เหอซู'];const namesM=['เซียวจิ่ง','หลี่เว่ย','เฉินเฟิง','จ้าวหยวน','ซ่งเหยียน','กู้เฉิง','เว่ยอัน','ฟางจวิน','หลัวเจ๋อ','ฉินมู่'];
+const classes=['ครอบครัวยากจน','ครอบครัวชาวนา','ครอบครัวพ่อค้า','ตระกูลขุนนาง','ตระกูลบัณฑิต','เชื้อพระวงศ์'];const ranks=['สามัญชน','บ่าวรับใช้','พ่อค้า/แม่ค้า','บัณฑิต','ขุนนางชั้นผู้น้อย','ขุนนางชั้นสูง'];
+const el=id=>document.getElementById(id);let game=null,timer=null,paused=true,auto=false,musicOn=false;
+const milestones=[0,1,6,12,16,22,30,40,50,60,70,80,90];
+function rand(a){return a[Math.floor(Math.random()*a.length)]}function clamp(n){return Math.max(0,Math.min(100,n))}
+function showModal(title,msg){el('modalTitle').textContent=title;el('modalText').textContent=msg;el('modal').classList.remove('hidden')}
+el('modalClose').onclick=()=>el('modal').classList.add('hidden');el('howBtn').onclick=()=>showModal('วิธีใช้ชีวิตใน浮生录','กด “ปีถัดไป” เพื่อเดินเวลา เมื่อถึงวัยสำคัญจะมีตัวเลือกให้ตัดสินใจ กดอัตโนมัติเพื่อให้เกมเลือกแทน ปรับความเร็วหรือหยุดได้ทุกเมื่อ สุขภาพ ความสุข ปัญญา และวาสนาจะเปลี่ยนตามเส้นทางที่เลือก');
+function stageFor(age){if(age===0)return 0;if(age<6)return 1;if(age<16)return 2;if(age<30)return 3;if(age<55)return 4;if(age<75)return 5;return 6}
+function makeLife(){let female=Math.random()<.5;return {name:rand(female?namesF:namesM),female,age:0,endAge:Math.floor(68+Math.random()*28),status:rand(classes),rank:'สามัญชน',health:Math.floor(66+Math.random()*30),joy:Math.floor(45+Math.random()*40),wisdom:Math.floor(10+Math.random()*20),fortune:Math.floor(15+Math.random()*45),married:false,children:0,events:[],dead:false}}
+function sceneFor(age){let s=el('person');s.classList.remove('hidden','male','old','child');if(!game)return;if(!game.female)s.classList.add('male');if(age<6)s.classList.add('child');if(age>=65)s.classList.add('old');}
+function updateStats(){['health','joy','wisdom','fortune'].forEach(k=>el(k).textContent=game[k]);el('progressFill').style.width=(game.age/game.endAge*100)+'%';el('ageText').textContent=`${game.name} · อายุ ${game.age} ปี`;el('status').textContent=paused?'หยุดพัก':auto?'อัตโนมัติ':'กำลังดำเนินชีวิต';let stages=[...document.querySelectorAll('.stage')];stages.forEach((s,i)=>s.classList.toggle('active',i===stageFor(game.age)));sceneFor(game.age)}
+function eventFor(age){let n=game.name,gender=game.female?'หญิง':'ชาย';if(age===0)return ['降生 · กำเนิด',`ยามเหม่า ณ เมืองฉางอาน ${game.status} ได้ต้อนรับทารก${gender}น้อยนามว่า “${n}” เสียงร้องแรกดังขึ้นท่ามกลางกลิ่นธูปและแสงโคมแดง ครอบครัวเชื่อว่าชะตาฟ้าจะเปิดทางให้เด็กคนนี้`];
+if(age===1)return ['幼年 · วัยเยาว์',`${n} เริ่มหัดเดินบนลานหินหน้าบ้าน ท่านย่าผูกด้ายแดงไว้ที่ข้อมือ พร้อมพรให้เติบโตแข็งแรง แม้บ้านจะไม่ได้มั่งคั่ง แต่ทุกคนต่างทะนุถนอมเด็กน้อย`];
+if(age===6)return ['启蒙 · เริ่มเรียนรู้',`เมื่ออายุหกปี ${n} ได้เห็นเด็กในละแวกถือพู่กันเดินเข้าโรงเรียน เสียงท่องตำราดังก้องจากเรือนไม้ ความรู้ดูเป็นหนทางไกล แต่ก็เป็นประตูบานหนึ่งของชีวิต`];
+if(age===12)return ['少年 · วัยกำลังเติบโต',`${n} เริ่มช่วยงานครอบครัวและเรียนรู้กฎเกณฑ์ของสังคม ในตลาดมีทั้งเสียงพ่อค้า กลิ่นชาร้อน และข่าวจากเมืองหลวง ความฝันแรกเริ่มก่อตัวขึ้นอย่างเงียบงัน`];
+if(age===16)return ['及笄 / 弱冠 · วัยเยาว์',`เมื่อเข้าสู่วัยสิบหก ${n} เริ่มถูกคาดหวังให้รับผิดชอบมากขึ้น วันหนึ่งได้พบผู้เดินทางจากเมืองหลวง ผู้เล่าเรื่องการสอบขุนนางและชีวิตในวัง ความเป็นไปได้ใหม่ ๆ จึงปรากฏขึ้น`];
+if(age===22)return ['成年 · ก้าวสู่ผู้ใหญ่',`อายุยี่สิบสองปี ${n} ยืนอยู่ตรงทางแยกของชีวิต จะอยู่ช่วยครอบครัว สร้างฐานะด้วยการค้า หรือเสี่ยงเดินทางไปแสวงหาความรู้ ทุกเส้นทางมีราคาที่ต้องจ่าย`];
+if(age===30)return ['立业 · สร้างหลักฐาน',`${n} ผ่านวันเวลามามากพอที่จะเข้าใจว่าโชคชะตาไม่ใช่สิ่งเดียวที่กำหนดชีวิต ชื่อเสียง ความมั่นคง และคนที่อยู่เคียงข้างเริ่มมีความหมายแตกต่างกัน`];
+if(age===40)return ['中年 · วัยกลางคน',`วัยสี่สิบมาถึงพร้อมภาระหน้าที่ ${n} มองย้อนกลับไปยังการตัดสินใจในวัยหนุ่มสาว บางสิ่งสำเร็จ บางสิ่งหล่นหาย แต่ชีวิตยังมีบทใหม่รออยู่`];
+if(age===50)return ['知天命 · เข้าใจชะตา',`เมื่ออายุห้าสิบ ${n} เริ่มเห็นความเปลี่ยนแปลงของผู้คนและบ้านเมืองชัดขึ้น ความทะเยอทะยานค่อย ๆ แปรเป็นความเข้าใจว่าอะไรควรเก็บรักษา และอะไรควรปล่อยไป`];
+if(age===60)return ['花甲 · วัยหกสิบ',`เส้นผมเริ่มมีสีเงิน ${n} ใช้เวลายามเช้าจิบชาใต้ต้นเหมย เรื่องราวที่เคยเร่งรีบกลับดูห่างไกล เหลือเพียงความทรงจำและคนที่ยังนั่งร่วมโต๊ะ`];
+if(age===70)return ['古稀 · วัยชรา',`ย่างเข้าสู่วัยเจ็ดสิบ ${n} เดินช้าลงและพักบ่อยขึ้น เสียงลมพัดชายคาเหมือนท่วงทำนองเก่าแก่ บางวันร่างกายอ่อนแรง แต่หัวใจยังจดจำเรื่องราวได้`];
+if(age>=game.endAge)return ['归去 · คืนสู่ธุลี',`ในคืนสงบ ${n} หลับตาลงท่ามกลางความอบอุ่นของคนใกล้ชิด ชีวิตหนึ่งเดินทางมาถึงปลายทาง ทิ้งไว้ทั้งความรัก ความผิดพลาด และความทรงจำในโลกที่ยังคงหมุนต่อไป`];
+return ['岁月 · วันเวลาผ่านไป',`ปีที่ ${age} ของ ${n} ผ่านไปอย่างเรียบง่าย มีเรื่องเล็กน้อยให้จดจำ และมีวันธรรมดาที่กลายเป็นส่วนหนึ่งของชีวิต บางครั้งความเปลี่ยนแปลงก็มาถึงโดยไม่ส่งเสียง`]}
+function renderEvent(title,body,choices=[]){el('eventKicker').textContent=title.split(' · ')[0];el('eventHead').textContent=title.split(' · ').slice(1).join(' · ')||title;el('story').textContent=body;let c=el('choices');c.innerHTML='';choices.forEach(ch=>{let b=document.createElement('button');b.className='choice';b.innerHTML='<strong>'+ch.title+'</strong><small>'+ch.desc+'</small>';b.onclick=()=>choose(ch);c.appendChild(b)});c.classList.toggle('hidden',!choices.length)}
+function choicesFor(age){if([6,12,16,22,30,40,50,60,70].includes(age))return [
+{title:'📜 มุ่งศึกษาเล่าเรียน',desc:'เพิ่มปัญญา แต่อาจเหน็ดเหนื่อย',effect:{wisdom:8,health:-3,fortune:3},result:'เลือกเดินบนเส้นทางแห่งตำราและการเรียนรู้'},
+{title:'🏮 ช่วยเหลือครอบครัว',desc:'เพิ่มความสุขและความผูกพัน',effect:{joy:7,health:2,fortune:2},result:'เลือกอยู่ใกล้คนในครอบครัวและดูแลกิจการ'},
+{title:'🐎 ออกเดินทางแสวงโชค',desc:'มีโอกาสเพิ่มวาสนา แต่เสี่ยงต่อสุขภาพ',effect:{fortune:10,health:-7,joy:2},result:'ออกเดินทางไปพบผู้คนและโอกาสใหม่'}];return []}
+function choose(ch){Object.entries(ch.effect).forEach(([k,v])=>game[k]=clamp(game[k]+v));game.events.push({age:game.age,title:ch.title,detail:ch.result});renderEvent('抉择 · การตัดสินใจ',ch.result+' ชะตาชีวิตค่อย ๆ เปลี่ยนไปตามสิ่งที่เลือก');el('choices').classList.add('hidden');updateStats();if(auto)setTimeout(nextYear,900)}
+function nextYear(){if(!game||game.dead||paused)return;game.age++;game.health=clamp(game.health-(Math.random()<.12?Math.floor(Math.random()*9):Math.floor(Math.random()*3)));game.joy=clamp(game.joy+(Math.random()<.5?1:-1));game.wisdom=clamp(game.wisdom+(game.age<25?Math.floor(Math.random()*3):0));if(game.age===24&&Math.random()<.65){game.married=true;game.joy=clamp(game.joy+8);game.events.push({age:24,title:'成家 · สร้างครอบครัว',detail:'พบคู่ครองและเริ่มต้นครอบครัว'})}
+if(game.age>=game.endAge||game.health<=0){game.dead=true;paused=true;auto=false;el('pauseBtn').textContent='Ⅱ หยุด';el('autoBtn').textContent='自動 อัตโนมัติ: ปิด';let [t,b]=eventFor(game.endAge);renderEvent(t,b);el('eventHead').textContent='ชีวิตสิ้นสุดลงอย่างสงบ';el('story').textContent=b;el('nextBtn').disabled=true;el('status').textContent='จบบันทึกชีวิต';el('screenTitle').textContent='บันทึกชีวิตของ '+game.name;el('screenSub').textContent=`อายุ ${game.age} ปี · ${game.status} · ${game.rank}`;game.events.push({age:game.age,title:'归去 · ปลายทาง',detail:b});localStorage.setItem('fushenglu-last',JSON.stringify(game));}
+else {let [t,b]=eventFor(game.age);let cs=choicesFor(game.age);renderEvent(t,b,cs);if(!cs.length&&auto)setTimeout(nextYear,900)}updateStats()}
+function start(){game=makeLife();paused=true;auto=false;el('screenTitle').textContent='ชะตาของ '+game.name;el('screenSub').textContent=`${game.female?'หญิง':'ชาย'} · ${game.status} · ${game.endAge} ปีโดยประมาณ`;el('mainPanel').classList.remove('hidden');el('stats').classList.remove('hidden');el('progress').classList.remove('hidden');el('startControls').classList.add('hidden');el('gameControls').classList.remove('hidden');el('toolbar').classList.remove('hidden');el('nextBtn').disabled=false;el('pauseBtn').textContent='▶ เริ่มเดินเวลา';el('autoBtn').textContent='自動 อัตโนมัติ: ปิด';el('screenTitle').textContent='กำเนิด · '+game.name;let [t,b]=eventFor(0);renderEvent(t,b);updateStats();showModal('命运已启 · ชะตาเริ่มต้น',`คุณคือ ${game.name} เกิดใน${game.status} เพศ${game.female?'หญิง':'ชาย'} ชีวิตจะดำเนินไปทีละปี กด “ปีถัดไป” เพื่อเริ่มเดินทาง`)}
+el('startBtn').onclick=start;el('nextBtn').onclick=()=>{if(paused){paused=false;el('pauseBtn').textContent='Ⅱ หยุด'}nextYear()};el('pauseBtn').onclick=()=>{paused=!paused;el('pauseBtn').textContent=paused?'▶ เดินต่อ':'Ⅱ หยุด';updateStats();if(!paused&&auto)runAuto()};el('autoBtn').onclick=()=>{auto=!auto;el('autoBtn').textContent='自動 อัตโนมัติ: '+(auto?'เปิด':'ปิด');if(auto){paused=false;el('pauseBtn').textContent='Ⅱ หยุด';runAuto()}updateStats()};function runAuto(){if(!auto||paused||!game||game.dead)return;let cs=choicesFor(game.age);if(cs.length){choose(rand(cs));return}nextYear();setTimeout(runAuto,Math.max(700,2500/Number(el('speed').value)))}
+async function music(){const a=el('bgm');if(!a)return;if(!musicOn){try{await a.play();musicOn=true;el('musicBtn').style.background='#ead1a8';el('musicBtn').textContent='♫'}catch(e){showModal('แตะเพื่อเปิดเพลง','เบราว์เซอร์อาจบล็อกเสียงอัตโนมัติ ลองกดปุ่มเพลงอีกครั้ง')} }else{a.pause();musicOn=false;el('musicBtn').style.background='#fff8e9';el('musicBtn').textContent='♪'}} 
+el('musicBtn').onclick=music;
+</script></body></html>
